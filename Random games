@@ -1,31 +1,58 @@
 import requests
 import random
-
+from pokebase import pokemon
+import webbrowser
+# Ask the user if they want to start, if not, exit
+start_pokemon = input('Welcome to Pokemon World! Shall we begin? (y/n) : ')
+if start_pokemon == 'n' :
+ print('\nAww.. See you next time then!')
+ exit()
+else :
+ print('\nGreat!')
+# pokeapi request/response
 def pick_pokemon():
  random_pokemon = random.randrange(1, 151)
- for i in range(random_pokemon):
-  url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(random_pokemon)
-  response = requests.get(url)
-  pokemon = response.json()
-  return {
+ url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(random_pokemon)
+ response = requests.get(url)
+ pokemon = response.json()
+# Extract the pokemon's name, id, height and weight
+ return {
    'name' : pokemon['name'],
    'id' : pokemon['id'],
    'weight' : pokemon['weight'],
-   'height' : pokemon['height'] }
-
+   'height' : pokemon['height'],
+    }
 your_pokemon = pick_pokemon()
 opponent_pokemon = pick_pokemon()
-
+# a random pokemon is given to the user
 print('Your pokemon is {}.'.format(your_pokemon['name']))
-print("The opponent's pokemon is {}.".format(opponent_pokemon['name']))
-choose_stat=input('\nwhich stat would you like to use? (id, height or weight): ')
+# Ask the user if they want to see an image of their pokemon
+image_pokemon = input('Would you like to see your pokemon? (y/n) : ')
+if image_pokemon == 'y':
+    print("Look! So adorable!")
+    poke = pokemon(your_pokemon['name'])
+    print(webbrowser.open(poke.sprites.front_default))
+else:
+    pass
+# a random pokemon is given to the opponent
+print("\nThe opponent's pokemon is {}.".format(opponent_pokemon['name']))
+# Ask the user if they want to see an image of the opponent's pokemon
+image_pokemon_o = input("Would you like to see the opponent's pokemon? (y/n) : ")
+if image_pokemon_o == 'y':
+    print("Not bad!")
+    poke = pokemon(opponent_pokemon['name'])
+    print(webbrowser.open(poke.sprites.front_default))
+else:
+    pass
 
+# Ask the user which stat they want to use
+choose_stat=input('\nwhich stat would you like to use? (id, height or weight): ')
 your_stat=your_pokemon[choose_stat]
 opponent_stat= opponent_pokemon[choose_stat]
-
+# Compare 2 pokemon on the chosen stat to check who wins
 if your_stat > opponent_stat:
  print("{} vs {}, Yes! You win!".format(your_stat,opponent_stat))
 elif your_stat < opponent_stat:
- print("{} vs {}, Sorry! Not today!".format(your_stat,opponent_stat))
+ print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
 else:
- print("{} vs {}, Phew! One more round?".format(your_stat,opponent_stat))
+ print("{} vs {}, Phew! Not lose yet!".format(your_stat,opponent_stat))
