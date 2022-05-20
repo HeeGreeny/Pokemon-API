@@ -1,0 +1,31 @@
+import requests
+import random
+
+def pick_pokemon():
+ random_pokemon = random.randrange(1, 151)
+ for i in range(random_pokemon):
+  url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(random_pokemon)
+  response = requests.get(url)
+  pokemon = response.json()
+  return {
+   'name' : pokemon['name'],
+   'id' : pokemon['id'],
+   'weight' : pokemon['weight'],
+   'height' : pokemon['height'] }
+
+your_pokemon = pick_pokemon()
+opponent_pokemon = pick_pokemon()
+
+print('Your pokemon is {}.'.format(your_pokemon['name']))
+print("The opponent's pokemon is {}.".format(opponent_pokemon['name']))
+choose_stat=input('\nwhich stat would you like to use? (id, height or weight): ')
+
+your_stat=your_pokemon[choose_stat]
+opponent_stat= opponent_pokemon[choose_stat]
+
+if your_stat > opponent_stat:
+ print("{} vs {}, Yes! You win!".format(your_stat,opponent_stat))
+elif your_stat < opponent_stat:
+ print("{} vs {}, Sorry! Not today!".format(your_stat,opponent_stat))
+else:
+ print("{} vs {}, Phew! One more round?".format(your_stat,opponent_stat))
