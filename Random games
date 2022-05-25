@@ -2,6 +2,7 @@ import requests
 import random
 from pokebase import pokemon
 import webbrowser
+
 # Ask the user if they want to start, if not, exit
 start_pokemon = input('Welcome to Pokemon World! Shall we begin? (y/n) : ')
 if start_pokemon == 'n' :
@@ -20,7 +21,7 @@ def pick_pokemon():
    'name' : pokemon['name'],
    'id' : pokemon['id'],
    'weight' : pokemon['weight'],
-   'height' : pokemon['height'],
+   'height' : pokemon['height']
     }
 your_pokemon = pick_pokemon()
 opponent_pokemon = pick_pokemon()
@@ -46,7 +47,7 @@ else:
     pass
 
 # Ask the user which stat they want to use
-choose_stat=input('\nwhich stat would you like to use? (id, height or weight): ')
+choose_stat=input('\nwhich stat would you like to use to compete? (id, height or weight): ')
 your_stat=your_pokemon[choose_stat]
 opponent_stat= opponent_pokemon[choose_stat]
 # Compare 2 pokemon on the chosen stat to check who wins
@@ -56,3 +57,18 @@ elif your_stat < opponent_stat:
  print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
 else:
  print("{} vs {}, Phew! Not lose yet!".format(your_stat,opponent_stat))
+
+# Ask the user to input 5 random numbers to extract 5 pokemons
+input("\nLet's move on to the next game! \nEnter 5 random Pokemon ID that you'd like to call out! ")
+number_list= []
+for i in range(0, 5):
+    print("Enter Pokemon's ID", i+1, ': ' )
+    item = input()
+    number_list.append(item)
+print("5 Pokemon IDs list : ", number_list)
+
+for i in range(len(number_list)):
+ url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(number_list[i])
+ response = requests.get(url)
+ pokemon = response.json()
+ print('name : {} '.format(pokemon['name']))
