@@ -78,3 +78,7 @@ for i in range(len(number_list)):
  response = requests.get(url)
  pokemon = response.json()
  print('name : {} '.format(pokemon['name']))
+
+#ask the user to pick a pokemon
+choose_pokemon = input('nice one! Which pokemon do you choose? ')
+print('You chose {}!'.format(choose_pokemon))
