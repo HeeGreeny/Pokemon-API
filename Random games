@@ -22,6 +22,12 @@ def pick_pokemon():
    'id' : pokemon['id'],
    'weight' : pokemon['weight'],
    'height' : pokemon['height']
+   'stat_hp': pokemon['stats'][0]['base_stat'],
+   'stat_attack': pokemon['stats'][1]['base_stat'],
+   'stat_defense': pokemon['stats'][2]['base_stat'],
+   'stat_special_attack': pokemon['stats'][3]['base_stat'],
+   'stat_special_defense': pokemon['stats'][4]['base_stat'],
+   'stat_speed' : pokemon['stats'][5]['base_stat']
     }
 your_pokemon = pick_pokemon()
 opponent_pokemon = pick_pokemon()
