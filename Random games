@@ -82,3 +82,6 @@ for i in range(len(number_list)):
 #ask the user to pick a pokemon
 choose_pokemon = input('nice one! Which pokemon do you choose? ')
 print('You chose {}!'.format(choose_pokemon))
+#ask the user to pick a pokemon for the opponent
+choose_opponent_pokemon = input('Who do you pick to play against? ')
+print('{}!'.format(choose_opponent_pokemon))
