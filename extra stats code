@@ -1,0 +1,30 @@
+import random
+
+import requests
+
+def random_pokemon():
+    pokemon_number = random.randint(1,151)
+    url='https://pokeapi.co/api/v2/pokemon/{}/'.format(pokemon_number)
+    response = requests.get(url)
+    pokemon = response.json()
+
+    return {
+        'name': pokemon['name'],
+        'id': pokemon['id'],
+        'height': pokemon['height'],
+        'weight': pokemon['weight'],
+        'stat_hp': pokemon['stats'][0]['base_stat'],
+        'stat_attack': pokemon['stats'][1]['base_stat'],
+        'stat_defense': pokemon['stats'][2]['base_stat'],
+        'stat_special_attack': pokemon['stats'][3]['base_stat'],
+        'stat_special_defense': pokemon['stats'][4]['base_stat'],
+        'stat_speed' : pokemon['stats'][5]['base_stat']
+    }
+my_pokemon = random_pokemon()
+print('{}'.format(my_pokemon['name']))
+print('hp: {}'.format(my_pokemon['stat_hp']))
+print('attack: {}'.format(my_pokemon['stat_attack']))
+print('defense: {}'.format(my_pokemon['stat_defense']))
+print('special attack: {}'.format(my_pokemon['stat_special_attack']))
+print('special defense: {}'.format(my_pokemon['stat_special_defense']))
+print('speed: {}'.format(my_pokemon['stat_speed']))
