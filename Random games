@@ -16,18 +16,18 @@ def pick_pokemon():
  url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(random_pokemon)
  response = requests.get(url)
  pokemon = response.json()
-# Extract the pokemon's name, id, height and weight
+# Extract the pokemon's name, id, height, weight and base stats
  return {
    'name' : pokemon['name'],
    'id' : pokemon['id'],
    'weight' : pokemon['weight'],
-   'height' : pokemon['height']
-   'stat_hp': pokemon['stats'][0]['base_stat'],
-   'stat_attack': pokemon['stats'][1]['base_stat'],
-   'stat_defense': pokemon['stats'][2]['base_stat'],
-   'stat_special_attack': pokemon['stats'][3]['base_stat'],
-   'stat_special_defense': pokemon['stats'][4]['base_stat'],
-   'stat_speed' : pokemon['stats'][5]['base_stat']
+   'height' : pokemon['height'],
+   'hp': pokemon['stats'][0]['base_stat'],
+   'attack': pokemon['stats'][1]['base_stat'],
+   'defense': pokemon['stats'][2]['base_stat'],
+   'special attack': pokemon['stats'][3]['base_stat'],
+   'special defense': pokemon['stats'][4]['base_stat'],
+   'speed': pokemon['stats'][5]['base_stat']
     }
 your_pokemon = pick_pokemon()
 opponent_pokemon = pick_pokemon()
@@ -53,7 +53,7 @@ else:
     pass
 
 # Ask the user which stat they want to use
-choose_stat=input('\nwhich stat would you like to use to compete? (id, height or weight): ')
+choose_stat=input('\nRouch 1: which stat would you like to use to compete? (id, height or weight): ')
 your_stat=your_pokemon[choose_stat]
 opponent_stat= opponent_pokemon[choose_stat]
 # Compare 2 pokemon on the chosen stat to check who wins
@@ -62,7 +62,19 @@ if your_stat > opponent_stat:
 elif your_stat < opponent_stat:
  print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
 else:
- print("{} vs {}, Phew! Not lose yet!".format(your_stat,opponent_stat))
+ print("{} vs {}, Phew! Not lost yet!".format(your_stat,opponent_stat))
+ 
+ #ask the user which base stat they would like to use
+choose_stat=input('\nRound 2: which base stat would you like to use to compete? (hp, attack, defense, special attack, special defense or speed): ')
+your_stat=your_pokemon[choose_stat]
+opponent_stat= opponent_pokemon[choose_stat]
+# Compare 2 pokemon on the chosen stat to check who wins
+if your_stat > opponent_stat:
+ print("{} vs {}, Yes! You win!".format(your_stat,opponent_stat))
+elif your_stat < opponent_stat:
+ print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
+else:
+ print("{} vs {}, Phew! Not lost yet!".format(your_stat,opponent_stat))
 
 # Ask the user to input 5 random numbers to extract 5 pokemons
 input("\nLet's move on to the next game! \nEnter 5 random Pokemon ID that you'd like to call out! ")
