@@ -5,30 +5,32 @@ import webbrowser
 
 # Ask the user if they want to start, if not, exit
 start_pokemon = input('Welcome to Pokemon World! Shall we begin? (y/n) : ')
-if start_pokemon == 'n' :
- print('\nAww.. See you next time then!')
- exit()
-else :
- print('\nGreat!')
+if start_pokemon == 'n':
+    print('\nAww.. See you next time then!')
+    exit()
+else:
+    print('\nGreat!')
+
 # pokeapi request/response
 def pick_pokemon():
- random_pokemon = random.randrange(1, 151)
- url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(random_pokemon)
- response = requests.get(url)
- pokemon = response.json()
-# Extract the pokemon's name, id, height, weight and base stats
- return {
-   'name' : pokemon['name'],
-   'id' : pokemon['id'],
-   'weight' : pokemon['weight'],
-   'height' : pokemon['height'],
-   'hp': pokemon['stats'][0]['base_stat'],
-   'attack': pokemon['stats'][1]['base_stat'],
-   'defense': pokemon['stats'][2]['base_stat'],
-   'special attack': pokemon['stats'][3]['base_stat'],
-   'special defense': pokemon['stats'][4]['base_stat'],
-   'speed': pokemon['stats'][5]['base_stat']
+    random_pokemon = random.randrange(1, 151)
+    url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(random_pokemon)
+    response = requests.get(url)
+    pokemon = response.json()
+    # Extract the pokemon's name, id, height, weight and base stats
+    return {
+        'name': pokemon['name'],
+        'id': pokemon['id'],
+        'weight': pokemon['weight'],
+        'height': pokemon['height'],
+        'hp': pokemon['stats'][0]['base_stat'],
+        'attack': pokemon['stats'][1]['base_stat'],
+        'defense': pokemon['stats'][2]['base_stat'],
+        'special attack': pokemon['stats'][3]['base_stat'],
+        'special defense': pokemon['stats'][4]['base_stat'],
+        'speed': pokemon['stats'][5]['base_stat']
     }
+
 your_pokemon = pick_pokemon()
 opponent_pokemon = pick_pokemon()
 # a random pokemon is given to the user
@@ -53,44 +55,46 @@ else:
     pass
 
 # Ask the user which stat they want to use
-choose_stat=input('\nRouch 1: which stat would you like to use to compete? (id, height or weight): ')
-your_stat=your_pokemon[choose_stat]
-opponent_stat= opponent_pokemon[choose_stat]
+choose_stat = input('\nRound 1: which stat would you like to use to compete? (id, height or weight): ')
+your_stat = your_pokemon[choose_stat]
+opponent_stat = opponent_pokemon[choose_stat]
 # Compare 2 pokemon on the chosen stat to check who wins
 if your_stat > opponent_stat:
- print("{} vs {}, Yes! You win!".format(your_stat,opponent_stat))
+    print("{} vs {}, Yes! You win!".format(your_stat, opponent_stat))
 elif your_stat < opponent_stat:
- print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
+    print("{} vs {}, Sorry! You lose!".format(your_stat, opponent_stat))
 else:
- print("{} vs {}, Phew! Not lost yet!".format(your_stat,opponent_stat))
-#variables to record win, lose or draw on round 1
+    print("{} vs {}, Phew! Not lost yet!".format(your_stat, opponent_stat))
+# variables to record win, lose or draw on round 1
 round_1_win = your_stat > opponent_stat
 round_1_lose = your_stat < opponent_stat
 round_1_draw = your_stat == opponent_stat
- 
- #ask the user which base stat they would like to use
-choose_stat=input('\nRound 2: which base stat would you like to use to compete? (hp, attack, defense, special attack, special defense or speed): ')
-your_stat=your_pokemon[choose_stat]
-opponent_stat= opponent_pokemon[choose_stat]
+
+# ask the user which base stat they would like to use
+choose_stat = input(
+    '\nRound 2: which base stat would you like to use to compete? (hp, attack, defense, special attack, special defense or speed): ')
+your_stat = your_pokemon[choose_stat]
+opponent_stat = opponent_pokemon[choose_stat]
 # Compare 2 pokemon on the chosen stat to check who wins
 if your_stat > opponent_stat:
- print("{} vs {}, Yes! You win!".format(your_stat,opponent_stat))
+    print("{} vs {}, Yes! You win!".format(your_stat, opponent_stat))
 elif your_stat < opponent_stat:
- print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
+    print("{} vs {}, Sorry! You lose!".format(your_stat, opponent_stat))
 else:
- print("{} vs {}, Phew! Not lost yet!".format(your_stat,opponent_stat))
-#variables to record win, lose or draw on round 2
+    print("{} vs {}, Phew! Not lost yet!".format(your_stat, opponent_stat))
+# variables to record win, lose or draw on round 2
 round_2_win = your_stat > opponent_stat
 round_2_lose = your_stat < opponent_stat
 round_2_draw = your_stat == opponent_stat
-#allows third round if needed
+# allows third round if needed
 if round_1_win and round_2_win:
     print('You won the game!')
 elif round_1_lose and round_2_lose:
     print('Sorry, you lost the game!')
 else:
-    print('Its a draw so far. Play a tie-breaker!')
-    choose_stat = input('\nRound 3: which stat would you like to use to compete? (id, height, weight, hp, attack, defense, special attack, special defense or speed): ')
+    print("It's a draw so far. Play a tie-breaker!")
+    choose_stat = input(
+        '\nRound 3: which stat would you like to use to compete? (id, height, weight, hp, attack, defense, special attack, special defense or speed): ')
     your_stat = your_pokemon[choose_stat]
     opponent_stat = opponent_pokemon[choose_stat]
     if your_stat > opponent_stat:
@@ -101,104 +105,112 @@ else:
         print("{} vs {}, Draw!".format(your_stat, opponent_stat))
 
 # Ask the user to input 5 random numbers to extract 5 pokemons
-input("\nLet's move on to the next game! \nEnter 5 random Pokemon ID that you'd like to call out! Remember, there are 151 to chose from!")
-number_list= []
+input(
+    "\nLet's move on to the next game! \nEnter 5 random Pokemon ID that you'd like to call out! Remember, there are 151 to chose from!")
+number_list = []
 for i in range(0, 5):
-    print("Enter Pokemon's ID", i+1, ': ' )
+    print("Enter Pokemon's ID", i + 1, ': ')
     item = input()
     number_list.append(item)
 print("5 Pokemon IDs list : ", number_list)
 
 for i in range(len(number_list)):
- url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(number_list[i])
- response = requests.get(url)
- pokemon = response.json()
- print('name : {} '.format(pokemon['name']))
+    url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(number_list[i])
+    response = requests.get(url)
+    pokemon = response.json()
+    print('name : {} '.format(pokemon['name']))
 
-#create dictionary for chosen pokemon
+# create dictionary for chosen pokemon
 def get_my_pokemon():
- your_pokemon = input('nice one! Which pokemon do you choose? ')
- url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(your_pokemon)
- response = requests.get(url)
- pokemon = response.json()
-# Extract the pokemon's name, id, height, weight and base stats
- return {
-   'name' : pokemon['name'],
-   'id' : pokemon['id'],
-   'weight' : pokemon['weight'],
-   'height' : pokemon['height'],
-   'hp': pokemon['stats'][0]['base_stat'],
-   'attack': pokemon['stats'][1]['base_stat'],
-   'defense': pokemon['stats'][2]['base_stat'],
-   'special attack': pokemon['stats'][3]['base_stat'],
-   'special defense': pokemon['stats'][4]['base_stat'],
-   'speed': pokemon['stats'][5]['base_stat']
+    your_pokemon = input('nice one! Which pokemon do you choose? ')
+    url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(your_pokemon)
+    response = requests.get(url)
+    pokemon = response.json()
+    # Extract the pokemon's name, id, height, weight and base stats
+    return {
+        'name': pokemon['name'],
+        'id': pokemon['id'],
+        'weight': pokemon['weight'],
+        'height': pokemon['height'],
+        'hp': pokemon['stats'][0]['base_stat'],
+        'attack': pokemon['stats'][1]['base_stat'],
+        'defense': pokemon['stats'][2]['base_stat'],
+        'special attack': pokemon['stats'][3]['base_stat'],
+        'special defense': pokemon['stats'][4]['base_stat'],
+        'speed': pokemon['stats'][5]['base_stat']
     }
+
+
 choose_pokemon = get_my_pokemon()
 
-#create dictionary for opponents chosen pokemon
+
+# create dictionary for opponents chosen pokemon
 def get_opponent_pokemon():
- opponent_pokemon = input('Who do you want to play against? ')
- url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(opponent_pokemon)
- response = requests.get(url)
- pokemon = response.json()
-# Extract the pokemon's name, id, height, weight and base stats
- return {
-   'name' : pokemon['name'],
-   'id' : pokemon['id'],
-   'weight' : pokemon['weight'],
-   'height' : pokemon['height'],
-   'hp' : pokemon['stats'][0]['base_stat'],
-   'attack': pokemon['stats'][1]['base_stat'],
-   'defense': pokemon['stats'][2]['base_stat'],
-   'special attack': pokemon['stats'][3]['base_stat'],
-   'special defense': pokemon['stats'][4]['base_stat'],
-   'speed': pokemon['stats'][5]['base_stat']
+    opponent_pokemon = input('Who do you want to play against? ')
+    url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(opponent_pokemon)
+    response = requests.get(url)
+    pokemon = response.json()
+    # Extract the pokemon's name, id, height, weight and base stats
+    return {
+        'name': pokemon['name'],
+        'id': pokemon['id'],
+        'weight': pokemon['weight'],
+        'height': pokemon['height'],
+        'hp': pokemon['stats'][0]['base_stat'],
+        'attack': pokemon['stats'][1]['base_stat'],
+        'defense': pokemon['stats'][2]['base_stat'],
+        'special attack': pokemon['stats'][3]['base_stat'],
+        'special defense': pokemon['stats'][4]['base_stat'],
+        'speed': pokemon['stats'][5]['base_stat']
     }
+
+
 choose_opponent_pokemon = get_opponent_pokemon()
 
 # Ask the user which stat they want to use
-choose_stat=input('\nRound 1: which stat would you like to use to compete? (id, height or weight): ')
-your_stat= choose_pokemon[choose_stat]
-opponent_stat= choose_opponent_pokemon[choose_stat]
+choose_stat = input('\nRound 1: which stat would you like to use to compete? (id, height or weight): ')
+your_stat = choose_pokemon[choose_stat]
+opponent_stat = choose_opponent_pokemon[choose_stat]
 
 # Compare 2 pokemon on the chosen stat to check who wins
 if your_stat > opponent_stat:
- print("{} vs {}, Yes! You win!".format(your_stat,opponent_stat))
+    print("{} vs {}, Yes! You win!".format(your_stat, opponent_stat))
 elif your_stat < opponent_stat:
- print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
+    print("{} vs {}, Sorry! You lose!".format(your_stat, opponent_stat))
 else:
- print("{} vs {}, Phew! Not lost yet!".format(your_stat,opponent_stat))
-#variables to record win, lose or draw on round 1
+    print("{} vs {}, Phew! Not lost yet!".format(your_stat, opponent_stat))
+# variables to record win, lose or draw on round 1
 round_4_win = your_stat > opponent_stat
 round_4_lose = your_stat < opponent_stat
 round_4_draw = your_stat == opponent_stat
 
 # Ask the user which stat they want to use
-choose_stat=input('\nRound 2: which base stat would you like to use to compete? (hp, attack, defense, special attack, special defense or speed): ')
-your_stat= choose_pokemon[choose_stat]
-opponent_stat= choose_opponent_pokemon[choose_stat]
+choose_stat = input(
+    '\nRound 2: which base stat would you like to use to compete? (hp, attack, defense, special attack, special defense or speed): ')
+your_stat = choose_pokemon[choose_stat]
+opponent_stat = choose_opponent_pokemon[choose_stat]
 
 # Compare 2 pokemon on the chosen stat to check who wins
 if your_stat > opponent_stat:
- print("{} vs {}, Yes! You win!".format(your_stat,opponent_stat))
+    print("{} vs {}, Yes! You win!".format(your_stat, opponent_stat))
 elif your_stat < opponent_stat:
- print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
+    print("{} vs {}, Sorry! You lose!".format(your_stat, opponent_stat))
 else:
- print("{} vs {}, Phew! Not lost yet!".format(your_stat,opponent_stat))
+    print("{} vs {}, Phew! Not lost yet!".format(your_stat, opponent_stat))
 
-#variables to record win, lose or draw on round 2
+# variables to record win, lose or draw on round 2
 round_5_win = your_stat > opponent_stat
 round_5_lose = your_stat < opponent_stat
 round_5_draw = your_stat == opponent_stat
-#allows third round if needed
+# allows third round if needed
 if round_4_win and round_5_win:
     print('You won the game!')
 elif round_4_lose and round_5_lose:
     print('Sorry, you lost the game!')
 else:
     print('Its a draw so far. Play a tie-breaker!')
-    choose_stat = input('\nRound 3: which stat would you like to use to compete? (id, height, weight, hp, attack, defense, special attack, special defense or speed): ')
+    choose_stat = input(
+        '\nRound 3: which stat would you like to use to compete? (id, height, weight, hp, attack, defense, special attack, special defense or speed): ')
     your_stat = your_pokemon[choose_stat]
     opponent_stat = opponent_pokemon[choose_stat]
     if your_stat > opponent_stat:
@@ -207,3 +219,5 @@ else:
         print("{} vs {}, Sorry! You lose!".format(your_stat, opponent_stat))
     else:
         print("{} vs {}, Draw!".format(your_stat, opponent_stat))
+
+print("\n\nHope you've enjoyed games today. Bye for now!")
