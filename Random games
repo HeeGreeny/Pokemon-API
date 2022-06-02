@@ -134,7 +134,7 @@ def get_opponent_pokemon():
 choose_opponent_pokemon = get_opponent_pokemon()
 
 # Ask the user which stat they want to use
-choose_stat=input('\nwhich stat would you like to use to compete? (id, height or weight): ')
+choose_stat=input('\nRound 1: which stat would you like to use to compete? (id, height or weight): ')
 your_stat= choose_pokemon[choose_stat]
 opponent_stat= choose_opponent_pokemon[choose_stat]
 
@@ -147,7 +147,7 @@ else:
  print("{} vs {}, Phew! Not lost yet!".format(your_stat,opponent_stat))
 
 # Ask the user which stat they want to use
-choose_stat=input('\nwhich base stat would you like to use to compete? (hp, attack, defense, special attack, special defense or speed): ')
+choose_stat=input('\nRound 2: which base stat would you like to use to compete? (hp, attack, defense, special attack, special defense or speed): ')
 your_stat= choose_pokemon[choose_stat]
 opponent_stat= choose_opponent_pokemon[choose_stat]
 
