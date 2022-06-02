@@ -63,6 +63,10 @@ elif your_stat < opponent_stat:
  print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
 else:
  print("{} vs {}, Phew! Not lost yet!".format(your_stat,opponent_stat))
+#variables to record win, lose or draw on round 1
+round_1_win = your_stat > opponent_stat
+round_1_lose = your_stat < opponent_stat
+round_1_draw = your_stat == opponent_stat
  
  #ask the user which base stat they would like to use
 choose_stat=input('\nRound 2: which base stat would you like to use to compete? (hp, attack, defense, special attack, special defense or speed): ')
@@ -75,6 +79,26 @@ elif your_stat < opponent_stat:
  print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
 else:
  print("{} vs {}, Phew! Not lost yet!".format(your_stat,opponent_stat))
+#variables to record win, lose or draw on round 2
+round_2_win = your_stat > opponent_stat
+round_2_lose = your_stat < opponent_stat
+round_2_draw = your_stat == opponent_stat
+#allows third round if needed
+if round_1_win and round_2_win:
+    print('You won the game!')
+elif round_1_lose and round_2_lose:
+    print('Sorry, you lost the game!')
+else:
+    print('Its a draw so far. Play a tie-breaker!')
+    choose_stat = input('\nRound 3: which stat would you like to use to compete? (id, height, weight, hp, attack, defense, special attack, special defense or speed): ')
+    your_stat = your_pokemon[choose_stat]
+    opponent_stat = opponent_pokemon[choose_stat]
+    if your_stat > opponent_stat:
+        print("{} vs {}, Yes! You win!".format(your_stat, opponent_stat))
+    elif your_stat < opponent_stat:
+        print("{} vs {}, Sorry! You lose!".format(your_stat, opponent_stat))
+    else:
+        print("{} vs {}, Draw!".format(your_stat, opponent_stat))
 
 # Ask the user to input 5 random numbers to extract 5 pokemons
 input("\nLet's move on to the next game! \nEnter 5 random Pokemon ID that you'd like to call out! Remember, there are 151 to chose from!")
