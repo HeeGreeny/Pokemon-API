@@ -91,9 +91,70 @@ for i in range(len(number_list)):
  pokemon = response.json()
  print('name : {} '.format(pokemon['name']))
 
-#ask the user to pick a pokemon
-choose_pokemon = input('nice one! Which pokemon do you choose? ')
-print('You chose {}!'.format(choose_pokemon))
-#ask the user to pick a pokemon for the opponent
-choose_opponent_pokemon = input('Who do you pick to play against? ')
-print('{}!'.format(choose_opponent_pokemon))
+#create dictionary for chosen pokemon
+def get_my_pokemon():
+ your_pokemon = input('nice one! Which pokemon do you choose? ')
+ url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(your_pokemon)
+ response = requests.get(url)
+ pokemon = response.json()
+# Extract the pokemon's name, id, height, weight and base stats
+ return {
+   'name' : pokemon['name'],
+   'id' : pokemon['id'],
+   'weight' : pokemon['weight'],
+   'height' : pokemon['height'],
+   'hp': pokemon['stats'][0]['base_stat'],
+   'attack': pokemon['stats'][1]['base_stat'],
+   'defense': pokemon['stats'][2]['base_stat'],
+   'special attack': pokemon['stats'][3]['base_stat'],
+   'special defense': pokemon['stats'][4]['base_stat'],
+   'speed': pokemon['stats'][5]['base_stat']
+    }
+choose_pokemon = get_my_pokemon()
+
+#create dictionary for opponents chosen pokemon
+def get_opponent_pokemon():
+ opponent_pokemon = input('Who do you want to play against? ')
+ url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(opponent_pokemon)
+ response = requests.get(url)
+ pokemon = response.json()
+# Extract the pokemon's name, id, height, weight and base stats
+ return {
+   'name' : pokemon['name'],
+   'id' : pokemon['id'],
+   'weight' : pokemon['weight'],
+   'height' : pokemon['height'],
+   'hp' : pokemon['stats'][0]['base_stat'],
+   'attack': pokemon['stats'][1]['base_stat'],
+   'defense': pokemon['stats'][2]['base_stat'],
+   'special attack': pokemon['stats'][3]['base_stat'],
+   'special defense': pokemon['stats'][4]['base_stat'],
+   'speed': pokemon['stats'][5]['base_stat']
+    }
+choose_opponent_pokemon = get_opponent_pokemon()
+
+# Ask the user which stat they want to use
+choose_stat=input('\nwhich stat would you like to use to compete? (id, height or weight): ')
+your_stat= choose_pokemon[choose_stat]
+opponent_stat= choose_opponent_pokemon[choose_stat]
+
+# Compare 2 pokemon on the chosen stat to check who wins
+if your_stat > opponent_stat:
+ print("{} vs {}, Yes! You win!".format(your_stat,opponent_stat))
+elif your_stat < opponent_stat:
+ print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
+else:
+ print("{} vs {}, Phew! Not lost yet!".format(your_stat,opponent_stat))
+
+# Ask the user which stat they want to use
+choose_stat=input('\nwhich base stat would you like to use to compete? (hp, attack, defense, special attack, special defense or speed): ')
+your_stat= choose_pokemon[choose_stat]
+opponent_stat= choose_opponent_pokemon[choose_stat]
+
+# Compare 2 pokemon on the chosen stat to check who wins
+if your_stat > opponent_stat:
+ print("{} vs {}, Yes! You win!".format(your_stat,opponent_stat))
+elif your_stat < opponent_stat:
+ print("{} vs {}, Sorry! You lose!".format(your_stat,opponent_stat))
+else:
+ print("{} vs {}, Phew! Not lost yet!".format(your_stat,opponent_stat))
