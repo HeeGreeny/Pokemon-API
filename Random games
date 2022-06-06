@@ -87,11 +87,11 @@ round_2_lose = your_stat < opponent_stat
 round_2_draw = your_stat == opponent_stat
 # allows third round if needed
 if round_1_win and round_2_win:
-    print('You won the game!')
+    print('\nYou won both games!')
 elif round_1_lose and round_2_lose:
-    print('Sorry, you lost the game!')
+    print('\nSorry, you lost both games!')
 else:
-    print("It's a draw so far. Play a tie-breaker!")
+    print("\nIt's a draw so far. Play a tie-breaker!")
     choose_stat = input('\nRound 3: which stat would you like to use to compete? (id, height, weight, hp, attack, defense, special attack, special defense or speed): ')
     your_stat = your_pokemon[choose_stat]
     opponent_stat = opponent_pokemon[choose_stat]
@@ -103,7 +103,7 @@ else:
         print("{} vs {}, Draw!".format(your_stat, opponent_stat))
 
 # Ask the user to input 5 random numbers to extract 5 pokemons
-input("\nLet's move on to the next game! \nEnter 5 random Pokemon ID that you'd like to call out! Remember, there are 151 to chose from!")
+input("\nLet's move on to the next game!\nEnter 5 random Pokemon ID that you'd like to call out! Remember, there are 151 to choose from! ")
 number_list = []
 for i in range(0, 5):
     print("Enter Pokemon's ID", i + 1, ': ')
@@ -119,7 +119,7 @@ for i in range(len(number_list)):
 
 # create dictionary for chosen pokemon
 def get_my_pokemon():
-    your_pokemon = input('nice one! Which pokemon do you choose? ')
+    your_pokemon = input('nice one! Which pokemon do you choose? Enter its name! ')
     url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(your_pokemon)
     response = requests.get(url)
     pokemon = response.json()
@@ -141,7 +141,7 @@ choose_pokemon = get_my_pokemon()
 
 # create dictionary for opponents chosen pokemon
 def get_opponent_pokemon():
-    opponent_pokemon = input('Who do you want to play against? ')
+    opponent_pokemon = input('Who do you want to play against? Enter its name! ')
     url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(opponent_pokemon)
     response = requests.get(url)
     pokemon = response.json()
@@ -197,11 +197,11 @@ round_5_lose = your_stat < opponent_stat
 round_5_draw = your_stat == opponent_stat
 # allows third round if needed
 if round_4_win and round_5_win:
-    print('You won the game!')
+    print('\nYou won both games!')
 elif round_4_lose and round_5_lose:
-    print('Sorry, you lost the game!')
+    print('\nSorry, you lost both games!')
 else:
-    print("It's a draw so far. Play a tie-breaker!")
+    print("\nIt's a draw so far. Play a tie-breaker!")
     choose_stat = input('\nRound 3: which stat would you like to use to compete? (id, height, weight, hp, attack, defense, special attack, special defense or speed): ')
     your_stat = your_pokemon[choose_stat]
     opponent_stat = opponent_pokemon[choose_stat]
