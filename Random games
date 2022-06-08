@@ -53,6 +53,7 @@ if image_pokemon_o == 'y':
     print(webbrowser.open(poke.sprites.front_default))
 else:
     pass
+print("\nIn this game you play two rounds. If it's a tie, play round 3!")
 
 # Ask the user which stat they want to use
 choose_stat = input('\nRound 1: which stat would you like to use to compete? (id, height or weight): ')
