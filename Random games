@@ -104,7 +104,7 @@ else:
         print("{} vs {}, Draw!".format(your_stat, opponent_stat))
 
 # Ask the user to input 5 random numbers to extract 5 pokemons
-input("\nLet's move on to the next game!\nEnter 5 random Pokemon ID that you'd like to call out! Remember, there are 151 to choose from! ")
+input("\nLet's move on to the next game!\nEnter 5 random Pokemon ID that you'd like to call out! Remember, there are 151 to choose from! Please press enter to begin ")
 number_list = []
 for i in range(0, 5):
     print("Enter Pokemon's ID", i + 1, ': ')
