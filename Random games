@@ -196,7 +196,7 @@ else:
 round_5_win = your_stat > opponent_stat
 round_5_lose = your_stat < opponent_stat
 round_5_draw = your_stat == opponent_stat
-# allows third round if needed
+# if no clear winner on first two rounds (win/win or lose/lose) allow for round 3 as a it's a knock out tie breaker. Tie breaker round can end in draw
 if round_4_win and round_5_win:
     print('\nYou won both games!')
 elif round_4_lose and round_5_lose:
