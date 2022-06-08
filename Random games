@@ -4,7 +4,7 @@ from pokebase import pokemon
 import webbrowser
 
 # Ask the user if they want to start, if not, exit
-start_pokemon = input('Welcome to Pokemon World! Shall we begin? (y/n) : ')
+start_pokemon = input('⭐Welcome to Pokemon World!⭐ Shall we begin? (y/n) : ')
 if start_pokemon == 'n':
     print('\nAww.. See you next time then!')
     exit()
@@ -212,4 +212,4 @@ else:
     else:
         print("{} vs {}, Draw!".format(your_stat, opponent_stat))
 
-print("\n\nHope you've enjoyed games today. Bye for now!")
+print("\n\nHope you've enjoyed games today. ⭐Bye for now!⭐")
